@@ -1,0 +1,22 @@
+.c-data {
+    display: inline-block;
+    align-self: start;
+    align-self: auto;
+}
+
+.c-check {
+    display: inline-block;
+}
+
+
+.th-data {
+    text-align: center;
+    border: 1px solid black;
+    width: 15%;
+}
+
+.th-icone {
+    text-align: center;
+    border: 1px solid black;
+    width: 7%;
+}
