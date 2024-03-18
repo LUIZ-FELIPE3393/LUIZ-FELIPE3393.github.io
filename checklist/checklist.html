@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
+
+    <link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="/icon-font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="css/checklist.css" type="text/css">
+
     <title>10Minutos</title>
 </head>
 <body>
@@ -13,7 +18,8 @@
         <header>
             <div class="row align-items-center">
                 <div class="col-4 text-center">
-                    
+                    <img src="img/2469.jpg" alt="Diga não à Dengue!" style="max-width: 96px;">
+                    <p style="font-size: 10px;"><a href="https://br.freepik.com/vetores-gratis/mosquito_4426158.htm#query=mosquito%20dengue&position=1&from_view=keyword&track=ais&uuid=751fe4ed-e612-4857-b625-156c286c6dc0">Imagem de macrovector_official</a> no Freepik</p>
                 </div>
                 <div class="col-4 text-center">
                     <a class="text-body-emphasis text-decoration-none" href="#">10 Minutos contra da Dengue</a>
@@ -28,62 +34,109 @@
             <div class="col-2">
             </div>  
             <div class="col-10">
-                <table style="width: 100%;">
-                    <tr>
-                        <th class="th-data">Data</th>
-                        <th class="th-icone">1</th>
-                        <th class="th-icone">2</th>
-                        <th class="th-icone">3</th>
-                        <th class="th-icone">4</th>
-                        <th class="th-icone">5</th>
-                        <th class="th-icone">6</th>
-                        <th class="th-icone">7</th>
-                        <th class="th-icone">8</th>
-                        <th class="th-icone">9</th>
-                        <th class="th-icone">10</th>
-                        <th class="th-icone">11</th>
-                    </tr>
-                </table>
-                <form action="/post-checklist" method="post">
-                    <div class="form-check form-check-inline">
-                        <input class="form-text-input" type="text" name="caixa-agua" id="caixa-agua" value="v-caixa">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="galao" id="galao" value="v-galao">
-                    </div>
-                    <div class="form-check form-check-inline"> 
-                        <input class="form-check-input" type="checkbox" name="vaso" id="vaso" value="v-vaso">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="balde" id="balde" value="v-balde">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="garrafa" id="garrafa" value="v-garrafa">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="pneu" id="pneu" value="v-pneu">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="piscina" id="piscina" value="v-piscina">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="pocas" id="pocas" value="v-pocas">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="pote" id="pote" value="v-pote">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="entulho" id="entulho" value="v-entulho">
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="calha" id="calha" value="v-calha">
-                    </div>
-
-                    
+                <form action="/save-checklist" method="post">
+                    <table name="checklist-table" id="checklist-table" style="width: 100%;">
+                        <div class="row align-items-right">
+                            <div class="col"></div>
+                            <div class="col">
+                                <div class="row align-items-right">
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary" type="submit">Salvar no navegador</button>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary" type="submit">Salvar no computador</button>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button class="btn btn-secondary" type="button">Carregar</button>
+                                    </div>
+                                </div>
+                                
+                            </div>     
+                        </div><br>
+                        
+                        <tr>
+                            <th class="th-data">Data</th>
+                            <th class="th-icone">caixa</th>
+                            <th class="th-icone">galao</th>
+                            <th class="th-icone">vaso</th>
+                            <th class="th-icone">balde</th>
+                            <th class="th-icone">grrfa</th>
+                            <th class="th-icone">pneu</th>
+                            <th class="th-icone">pscna</th>
+                            <th class="th-icone">pocas</th>
+                            <th class="th-icone">pote</th>
+                            <th class="th-icone">entlo</th>
+                            <th class="th-icone">calha</th>
+                        </tr>
+                        <tr id="tupla-1" name="tupla-1">
+                            <td class="td-data">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-text-input" type="text" name="datadia" id="datadia">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="caixa" id="caixa" value="v-caixa">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="galao" id="galao" value="v-galao">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline"> 
+                                    <input class="form-check-input" type="checkbox" name="vaso" id="vaso" value="v-vaso">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="balde" id="balde" value="v-balde">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="garrafa" id="garrafa" value="v-garrafa">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="pneu" id="pneu" value="v-pneu">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="piscina" id="piscina" value="v-piscina">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="pocas" id="pocas" value="v-pocas">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="pote" id="pote" value="v-pote">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="entulho" id="entulho" value="v-entulho">
+                                </div>
+                            </td>
+                            <td class="td-check">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" name="calha" id="calha" value="v-calha">
+                                </div>
+                            </td>   
+                        </tr>
+                    </table>                 
                 </form>
-
+                <i class="bi bi-plus-circle" name="add-checklist" id="add-checklist" style="font-size: 24px;"></i>
+                
             </div>
         </div>
     </div>
+    <script src="js/checklist.js"></script>
 </body>
 </html>

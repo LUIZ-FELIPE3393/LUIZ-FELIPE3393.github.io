@@ -1,0 +1,50 @@
+header {
+    padding: 2px;
+    border-bottom: 1px solid black;
+    margin-bottom: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 28px;
+}
+
+.c-data {
+    display: inline-block;
+    align-self: start;
+    align-self: auto;
+}
+
+.c-check {
+    display: inline-block;
+}
+
+
+.th-data {
+    text-align: center;
+    border: 1px solid black;
+    width: 15%;
+}
+
+.th-icone {
+    text-align: center;
+    border: 1px solid black;
+    width: 7%;
+}
+
+.td-data {
+    text-align: center;
+    border: 1px solid black;
+    width: 15%;
+}
+
+.td-check {
+    text-align: center;
+    border: 1px solid black;
+    width: 7%;
+}
+
+.bi-plus-circle {
+    transition: .08s;
+}
+
+.bi-plus-circle:hover {
+    color: cyan;
+}
