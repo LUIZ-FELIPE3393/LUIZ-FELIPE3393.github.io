@@ -34,7 +34,7 @@
             <div class="col-2">
             </div>  
             <div class="col-10">
-                <form action="/save-checklist" method="post">
+                <form id="formChecklist" action="/save-checklist" method="post">
                     <table name="checklist-table" id="checklist-table" style="width: 100%;">
                         <div class="row align-items-right">
                             <div class="col"></div>
@@ -68,65 +68,76 @@
                             <th class="th-icone">entlo</th>
                             <th class="th-icone">calha</th>
                         </tr>
-                        <tr id="tupla-1" name="tupla-1">
+                        <tr id="tupla-1" name="tupla">
                             <td class="td-data">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-text-input" type="text" name="datadia" id="datadia">
+                                    <input class="form-text-input" type="text" name="datadia" id="datadia" required>
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="caixa" id="caixa" value="v-caixa">
+                                    <input type="hidden" name="caixa" id="caixa" value="0">
+                                    <input class="form-check-input" type="checkbox" name="caixa" id="caixa" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="galao" id="galao" value="v-galao">
+                                    <input type="hidden" name="galao" id="galao" value="0">
+                                    <input class="form-check-input" type="checkbox" name="galao" id="galao" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline"> 
-                                    <input class="form-check-input" type="checkbox" name="vaso" id="vaso" value="v-vaso">
+                                    <input type="hidden" name="vaso" id="vaso" value="0">
+                                    <input class="form-check-input" type="checkbox" name="vaso" id="vaso" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="balde" id="balde" value="v-balde">
+                                    <input type="hidden" name="balde" id="balde" value="0">
+                                    <input class="form-check-input" type="checkbox" name="balde" id="balde" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="garrafa" id="garrafa" value="v-garrafa">
+                                    <input type="hidden" name="garrafa" id="garrafa" value="0">
+                                    <input class="form-check-input" type="checkbox" name="garrafa" id="garrafa" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="pneu" id="pneu" value="v-pneu">
+                                    <input type="hidden" name="pneu" id="pneu" value="0">
+                                    <input class="form-check-input" type="checkbox" name="pneu" id="pneu" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="piscina" id="piscina" value="v-piscina">
+                                    <input type="hidden" name="piscina" id="piscina" value="0">
+                                    <input class="form-check-input" type="checkbox" name="piscina" id="piscina" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="pocas" id="pocas" value="v-pocas">
+                                    <input type="hidden" name="pocas" id="pocas" value="0">
+                                    <input class="form-check-input" type="checkbox" name="pocas" id="pocas" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="pote" id="pote" value="v-pote">
+                                    <input type="hidden" name="pote" id="pote" value="0">
+                                    <input class="form-check-input" type="checkbox" name="pote" id="pote" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="entulho" id="entulho" value="v-entulho">
+                                    <input type="hidden" name="entulho" id="entulho" value="0">
+                                    <input class="form-check-input" type="checkbox" name="entulho" id="entulho" value="1">
                                 </div>
                             </td>
                             <td class="td-check">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="calha" id="calha" value="v-calha">
+                                    <input type="hidden" name="calha" id="calha" value="0">
+                                    <input class="form-check-input" type="checkbox" name="calha" id="calha" value="1">
                                 </div>
                             </td>   
                         </tr>
