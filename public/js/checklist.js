@@ -1,9 +1,22 @@
 const addButton = document.querySelector('#add-checklist');
 const checklistTable = document.querySelector('#checklist-table');
 const form = document.querySelector("#formChecklist");
-const saveButtonWeb = document.querySelector('#save-checklist-web');
+const saveButtonWeb = document.getElementById('save-checklist-web');
 
 let tupla_num = 1;
+
+const fetchCookies = fetch('/cookies').then( r => r.json() ).then( data => {
+    console.log('async');
+    return data;
+});
+
+window.addEventListener('DOMContentLoaded', async function(e) {
+    cookieDataJson = await fetchCookies;
+    console.log(cookieDataJson.cookieDatadia.length);
+    for(let i = 0; i < cookieDataJson.cookieDatadia.length - 1; i++) {
+        newTuple();
+    }
+});
 
 form.addEventListener('submit', function(e) {
     // Transforma valores de check nulo em 0
@@ -24,13 +37,17 @@ form.addEventListener('submit', function(e) {
 
 });
 
-addButton.addEventListener('click', function(e) {
+function newTuple() {
     let tuple = document.createElement("tr");
     tuple.setAttribute("id", "tupla-" + tupla_num);
     tuple.setAttribute("name", "tupla");
     tupla_num++;
     tuple.innerHTML = tupleFormat; 
     checklistTable.append(tuple);
+}
+
+addButton.addEventListener('click', function(e) {
+    newTuple();
 });
 
 const tupleFormat = `

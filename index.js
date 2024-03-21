@@ -1,7 +1,7 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const cookieParser = require('cookie')
+const cookieParser = require('cookie-parser');
 
 const saveChecklist = require('./checklist/save_checklist');
 
@@ -29,19 +29,32 @@ server.listen(3030, function() {
     app.use(express.static(path.join(__dirname, './public')));
 
 //Rotas
-app.post('/save-checklist', function(req, res) {
-    res.send(req.body.datadia);
+app.post('/save-checklist', function(req, res) {    
     console.log(req.body.datadia);
+    res.cookie("cookieDatadia", req.body.datadia);
+
     console.log(req.body.caixa);
+    res.cookie("cookieCaixa", req.body.caixa);
+
     console.log(req.body.galao);
+    res.cookie("cookieGalao", req.body.galao);
+
     console.log(req.body.vaso);
+    res.cookie("cookieVaso", req.body.vaso);
+
     console.log(req.body.balde);
+    res.cookie("cookieBalde", req.body.balde);
+    
+    console.log(req.body.pocas);
+    res.cookie("cookiePocas", req.body.pocas);
+
+    console.log(req.cookies);
+
+    res.redirect('/checklist');
 });
 
-app.get('/cookie',function(req, res){
-    let minute = 60 * 1000;
-    res.cookie(cookie_name, 'cookie_value', { secure: true });
-    return res.send('cookie has been set!');
+app.get('/cookies',function(req, res){
+    res.json(req.cookies);
 });
 
 app.get('/checklist', function(req,res,html) {
