@@ -31,7 +31,7 @@ tr {
 
 .td-data {
     text-align: center;
-    width: 18%;
+    width: 12%;
 }
 
 .td-check {
@@ -44,23 +44,41 @@ tr {
     min-width: 60px;
 }
 
-.form-check-input {
-  
+.fixed-bottom {
+    background-color: #e7e7e7; 
+    padding-top: 10px;
 }
 
-.bi-plus-circle {
+#button-bar {
+    border: 6px solid #e7e7e7; 
+    margin-bottom: 20px; 
+    margin-left: 15px;
+}
+
+#add-checklist {
     transition: .08s;
 }
 
-.bi-plus-circle:hover {
-    color: cyan;
+#add-checklist:hover {
+    color: white;
 }
 
 .checkbox-lg .form-check-input{
- top: .8rem;
- scale: 1.8;
- }
+    scale: 1.8;
+    margin-top: 10px;
+}
 
 .checkbox-lg .form-check-label {
- padding-top: 13px;
- }
+    padding-top: 8px;
+}
+
+body {
+    background-color: var(--bs-body-bg);
+}
+
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}   

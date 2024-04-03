@@ -3,8 +3,6 @@ const http = require("http");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
-const saveChecklist = require("./checklist/save_checklist");
-
 let app = express();
 let server = http.createServer(app);
 
@@ -20,15 +18,15 @@ app.use(express.json());
 app.use(cookieParser());
 
 //Bootstrap
-app.use("/css", express.static("./bootstrap/css"));
-app.use("/js", express.static("./bootstrap/js"));
+app.use("/css", express.static("./.depend/bootstrap/css"));
+app.use("/js", express.static("./.depend/bootstrap/js"));
 app.use("/icon-font", express.static("./node_modules/bootstrap-icons/font"));
 
 //Express
 app.use(express.static(path.join(__dirname, "./public")));
 
 //Rotas
-app.post("/save-checklist", function (req, res) {
+app.post("/save-checklist-web", function (req, res) {
   res.cookie("cookieDatadia", req.body.datadia);
   res.cookie("cookieCaixa", req.body.caixa);
   res.cookie("cookieGalao", req.body.galao);
@@ -45,6 +43,10 @@ app.post("/save-checklist", function (req, res) {
   console.log(req.cookies);
 
   res.redirect("/checklist");
+});
+
+app.post("/save-checklist-device", function (req, res) {
+  res.send("Iniciando Download");
 });
 
 app.get("/cookies", function (req, res) {

@@ -2,9 +2,29 @@ const addButton = document.querySelector("#add-checklist");
 const checklistTable = document.querySelector("#checklist-table");
 const form = document.querySelector("#formChecklist");
 const saveButtonWeb = document.getElementById("save-checklist-web");
+const saveButtonDevice = document.getElementById("save-checklist-device");
 const loadButton = document.getElementById("load-checklist");
 
 let tupla_num = 0;
+
+const saveFormOnWeb = (e) => {
+    for (let tuple of document.querySelectorAll("tr[name=tupla]")) {
+        console.log(tuple);
+        for (let checkbox of tuple.querySelectorAll("input[type=checkbox]")) {
+            console.log(checkbox);
+            if (!checkbox.checked) {
+                checkbox.value = 0;
+            } else {
+                for (let hiddenNode of tuple.querySelectorAll("input[type=hidden]")) {
+                if (hiddenNode.name == checkbox.name) {
+                    console.log(hiddenNode);
+                    hiddenNode.disabled = true;
+                }
+                }
+            }
+        }
+      }
+}
 
 const fetchCookies = fetch("/cookies")
   .then((r) => r.json())
@@ -14,6 +34,7 @@ const fetchCookies = fetch("/cookies")
 
 window.addEventListener("DOMContentLoaded", async function (e) {
     const cookieDataJson = await fetchCookies;
+    const checklistTableContent = checklistTable.querySelector("#table-content");
     let cookieLength = 0;
 
     if (typeof(cookieDataJson.cookieDatadia) === "undefined") return;
@@ -60,29 +81,18 @@ window.addEventListener("DOMContentLoaded", async function (e) {
         if (cookieDataJson.cookieCalha[i] === "1")
         tuple.querySelector("#calha").checked = true;
 
-        checklistTable.append(tuple);
+        checklistTableContent.append(tuple);
     }
 });
 
-form.addEventListener("submit", function (e) {
-  // Transforma valores de check nulo em 0
+form.addEventListener("submit", saveFormOnWeb);
 
-  for (let tuple of document.querySelectorAll("tr[name=tupla]")) {
-    console.log(tuple);
-    for (let checkbox of tuple.querySelectorAll("input[type=checkbox]")) {
-        console.log(checkbox);
-        if (!checkbox.checked) {
-            checkbox.value = 0;
-        } else {
-            for (let hiddenNode of tuple.querySelectorAll("input[type=hidden]")) {
-            if (hiddenNode.name == checkbox.name) {
-                console.log(hiddenNode);
-                hiddenNode.disabled = true;
-            }
-            }
-        }
-    }
-  }
+saveButtonWeb.addEventListener("click", (e) => {
+    form.setAttribute("action", "/save-checklist-web")
+});
+
+saveButtonDevice.addEventListener("click", (e) => {
+    form.setAttribute("action", "/save-checklist-device")
 });
 
 loadButton.addEventListener("click", async function (e) {
@@ -91,20 +101,21 @@ loadButton.addEventListener("click", async function (e) {
 
 addButton.addEventListener("click", function (e) {
   let tuple = document.createElement("tr");
+  const checklistTableContent = checklistTable.querySelector("#table-content");
   tuple.setAttribute("id", "tupla-" + tupla_num);
   tuple.setAttribute("name", "tupla");
   tuple.setAttribute("class", "align-center");
   tupla_num++;
   tuple.innerHTML = tupleFormat;
-  checklistTable.append(tuple);
+  checklistTableContent.append(tuple);
 });
 
 const tupleFormat = `
-<td class="td-data text-center">
+<th class="td-data text-center">
     <div class="form-check">
         <input class="form-control" type="date" name="datadia" id="datadia" required>
     </div>
-</td>
+</th>
 <td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="caixa" id="caixaHidden" value="0">
