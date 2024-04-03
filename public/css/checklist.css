@@ -52,7 +52,8 @@ tr {
 #button-bar {
     border: 6px solid #e7e7e7; 
     margin-bottom: 20px; 
-    margin-left: 15px;
+    display: flex;
+    justify-content: center;
 }
 
 #add-checklist {
@@ -75,10 +76,3 @@ tr {
 body {
     background-color: var(--bs-body-bg);
 }
-
-.sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-}   
