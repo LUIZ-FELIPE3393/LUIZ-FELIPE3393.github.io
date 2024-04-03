@@ -45,12 +45,14 @@ tr {
 }
 
 .fixed-bottom {
-    background-color: #e7e7e7; 
+    background-color: var(--bs-body-bg); 
     padding-top: 10px;
+    border-top: 1px solid black;
+    margin-left: 102px;
+    margin-right: 102px;
 }
 
 #button-bar {
-    border: 6px solid #e7e7e7; 
     margin-bottom: 20px; 
     display: flex;
     justify-content: center;
@@ -75,4 +77,25 @@ tr {
 
 body {
     background-color: var(--bs-body-bg);
+}
+
+@media all and (min-width:720px) and (max-width: 920px) {
+    .fixed-bottom {
+        margin-left: 64px;
+        margin-right: 16px;
+    }
+}
+
+@media all and (min-width:520px) and (max-width: 720px) {
+    .fixed-bottom {
+        margin-left: 32px;
+        margin-right: 32px;
+    }
+}
+
+@media all and (min-width:0px) and (max-width: 520px) {
+    .fixed-bottom {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
 }
