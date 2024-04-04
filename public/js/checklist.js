@@ -134,49 +134,49 @@ const tupleFormat = `
         <input class="form-check-input" type="checkbox" name="vaso" id="vaso" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="balde" id="baldeHidden" value="0">
         <input class="form-check-input" type="checkbox" name="balde" id="balde" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="garrafa" id="garrafaHidden" value="0">
         <input class="form-check-input" type="checkbox" name="garrafa" id="garrafa" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="pneu" id="pneuHidden" value="0">
         <input class="form-check-input" type="checkbox" name="pneu" id="pneu" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="piscina" id="piscinaHidden" value="0">
         <input class="form-check-input" type="checkbox" name="piscina" id="piscina" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="pocas" id="pocasHidden" value="0">
         <input class="form-check-input" type="checkbox" name="pocas" id="pocas" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="pote" id="poteHidden" value="0">
         <input class="form-check-input" type="checkbox" name="pote" id="pote" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="entulho" id="entulhoHidden" value="0">
         <input class="form-check-input" type="checkbox" name="entulho" id="entulho" value="1">
     </div>
 </td>
-<td class="td-check">
+<td class="td-check text-center">
     <div class="form-check checkbox-lg">
         <input type="hidden" name="calha" id="calhaHidden" value="0">
         <input class="form-check-input" type="checkbox" name="calha" id="calha" value="1">
