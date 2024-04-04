@@ -2,6 +2,8 @@ const express = require("express");
 const http = require("http");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const fileSystem = require("fs");
+const { error } = require("console");
 
 let app = express();
 let server = http.createServer(app);
@@ -13,7 +15,7 @@ server.listen(3030, function () {
 //Session
 
 //Bodyparser
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false })); 
 app.use(express.json());
 app.use(cookieParser());
 
@@ -45,8 +47,20 @@ app.post("/save-checklist-web", function (req, res) {
   res.redirect("/checklist");
 });
 
-app.post("/save-checklist-device", function (req, res) {
-  res.send("Iniciando Download");
+app.post("/save-checklist-device", async (req, res) => {
+  const url = path.join(__dirname, "./public/file.txt"); 
+  console.log("Download Iniciado");
+  fileSystem.writeFile(
+    url, 
+    JSON.stringify(req.body),
+    error => {
+    if (error)
+      console.log(error, "O arquivo não pôde ser criado");
+    else { //Arquivo criado e salvo no servidor
+      console.log("O arquivo foi criado");
+      res.redirect('/file'); //Leitura do arquivo no servidor
+    }
+    });
 });
 
 app.get("/cookies", function (req, res) {
@@ -68,6 +82,10 @@ app.get("/load", function (req, res) {
     res.clearCookie("cookieBalde");
 
     res.redirect("/checklist");
+});
+
+app.get("/file", (req, res) => {
+  res.download(path.join(__dirname, "./public/file.txt"));
 });
 
 app.get("/checklist", function (req, res, html) {

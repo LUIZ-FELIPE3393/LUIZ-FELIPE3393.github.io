@@ -75,6 +75,11 @@ tr {
     padding-top: 8px;
 }
 
+.form-check-input:hover {
+    border-color: #b8b8f5;
+    background-color: #b8b8f5;
+}
+
 body {
     background-color: var(--bs-body-bg);
 }
