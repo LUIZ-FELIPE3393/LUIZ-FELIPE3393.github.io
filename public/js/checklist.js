@@ -4,7 +4,6 @@ const form = document.querySelector("#formChecklist");
 const saveButtonWeb = document.getElementById("save-checklist-web");
 const saveButtonDevice = document.getElementById("save-checklist-device");
 const loadButton = document.getElementById("load-checklist");
-const fileInput = document.querySelector("#load-checklist-file");
 
 let tupla_num = 0;
 
@@ -17,14 +16,14 @@ const saveFormOnWeb = (e) => {
                 checkbox.value = 0;
             } else {
                 for (let hiddenNode of tuple.querySelectorAll("input[type=hidden]")) {
-                if (hiddenNode.name == checkbox.name) {
-                    console.log(hiddenNode);
-                    hiddenNode.disabled = true;
-                }
+                    if (hiddenNode.name == checkbox.name) {
+                        console.log(hiddenNode);
+                        hiddenNode.disabled = true;
+                    }
                 }
             }
         }
-      }
+    }
 }
 
 async function loadChecklistData(JSONData) {
@@ -36,9 +35,9 @@ async function loadChecklistData(JSONData) {
 
     let dataLength = 0;
 
-    if (typeof(JSONData.datadia) === "undefined") return;
+    if (typeof (JSONData.datadia) === "undefined") return;
 
-    if (typeof(JSONData.datadia) === "string") {
+    if (typeof (JSONData.datadia) === "string") {
         dataLength = 1;
     } else {
         dataLength = JSONData.datadia.length;
@@ -51,44 +50,44 @@ async function loadChecklistData(JSONData) {
         tupla_num++;
         tuple.innerHTML = tupleFormat;
 
-        if (typeof(JSONData.datadia) === "string") {
+        if (typeof (JSONData.datadia) === "string") {
             tuple.querySelector("#datadia").value = JSONData.datadia;
         } else {
             tuple.querySelector("#datadia").value = JSONData.datadia[i];
         }
-        
+
         if (JSONData.caixa[i] === "1")
-        tuple.querySelector("#caixa").checked = true;
+            tuple.querySelector("#caixa").checked = true;
         if (JSONData.galao[i] === "1")
-        tuple.querySelector("#galao").checked = true;
+            tuple.querySelector("#galao").checked = true;
         if (JSONData.vaso[i] === "1")
-        tuple.querySelector("#vaso").checked = true;
+            tuple.querySelector("#vaso").checked = true;
         if (JSONData.balde[i] === "1")
-        tuple.querySelector("#balde").checked = true;
+            tuple.querySelector("#balde").checked = true;
         if (JSONData.pocas[i] === "1")
-        tuple.querySelector("#pocas").checked = true;
+            tuple.querySelector("#pocas").checked = true;
         if (JSONData.garrafa[i] === "1")
-        tuple.querySelector("#garrafa").checked = true;
+            tuple.querySelector("#garrafa").checked = true;
         if (JSONData.pneu[i] === "1")
-        tuple.querySelector("#pneu").checked = true;
+            tuple.querySelector("#pneu").checked = true;
         if (JSONData.piscina[i] === "1")
-        tuple.querySelector("#piscina").checked = true;
+            tuple.querySelector("#piscina").checked = true;
         if (JSONData.pote[i] === "1")
-        tuple.querySelector("#pote").checked = true;
+            tuple.querySelector("#pote").checked = true;
         if (JSONData.entulho[i] === "1")
-        tuple.querySelector("#entulho").checked = true;
+            tuple.querySelector("#entulho").checked = true;
         if (JSONData.calha[i] === "1")
-        tuple.querySelector("#calha").checked = true;
+            tuple.querySelector("#calha").checked = true;
 
         checklistTableContent.append(tuple);
     }
-} 
+}
 
 const fetchCookies = fetch("/cookies")
-  .then((r) => r.json())
-  .then((data) => {
-    return data;
-  });
+    .then((r) => r.json())
+    .then((data) => {
+        return data;
+    });
 
 async function fetchSaveFile(checklistDataURL) {
     return fetch(checklistDataURL)
@@ -105,18 +104,6 @@ window.addEventListener("DOMContentLoaded", async function (e) {
 
 form.addEventListener("submit", saveFormOnWeb);
 
-saveButtonWeb.addEventListener("click", (e) => {
-    form.setAttribute("action", "/save-checklist-web")
-});
-
-saveButtonDevice.addEventListener("click", (e) => {
-    form.setAttribute("action", "/save-checklist-device")
-});
-
-loadButton.addEventListener("click", async function (e) {
-    fileInput.click();
-});
-
 addButton.addEventListener("click", function (e) {
     let tuple = document.createElement("tr");
     const checklistTableContent = checklistTable.querySelector("#table-content");
@@ -126,14 +113,6 @@ addButton.addEventListener("click", function (e) {
     tupla_num++;
     tuple.innerHTML = tupleFormat;
     checklistTableContent.append(tuple);
-});
-
-fileInput.addEventListener("change", async () => {
-    for (const file of fileInput.files) {
-        const checklistDataURL = URL.createObjectURL(file);
-        const checklistDataJson = await fetchSaveFile(checklistDataURL);
-        loadChecklistData(checklistDataJson);
-    }  
 });
 
 const tupleFormat = `
