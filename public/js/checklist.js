@@ -4,6 +4,7 @@ const form = document.querySelector("#formChecklist");
 const saveButtonWeb = document.getElementById("save-checklist-web");
 const saveButtonDevice = document.getElementById("save-checklist-device");
 const loadButton = document.getElementById("load-checklist");
+const fileInput = document.querySelector("#load-checklist-file");
 
 let tupla_num = 0;
 
@@ -26,63 +27,80 @@ const saveFormOnWeb = (e) => {
       }
 }
 
-const fetchCookies = fetch("/cookies")
-  .then((r) => r.json())
-  .then((data) => {
-    return data;
-  });
-
-window.addEventListener("DOMContentLoaded", async function (e) {
-    const cookieDataJson = await fetchCookies;
+async function loadChecklistData(JSONData) {
     const checklistTableContent = checklistTable.querySelector("#table-content");
-    let cookieLength = 0;
 
-    if (typeof(cookieDataJson.cookieDatadia) === "undefined") return;
-
-    if (typeof(cookieDataJson.cookieDatadia) === "string") {
-        cookieLength = 1;
-    } else {
-        cookieLength = cookieDataJson.cookieDatadia.length;
+    while (checklistTableContent.firstChild) {
+        checklistTableContent.removeChild(checklistTableContent.lastChild);
     }
 
-    for (let i = 0; i < cookieLength; i++) {
+    let dataLength = 0;
+
+    if (typeof(JSONData.datadia) === "undefined") return;
+
+    if (typeof(JSONData.datadia) === "string") {
+        dataLength = 1;
+    } else {
+        dataLength = JSONData.datadia.length;
+    }
+
+    for (let i = 0; i < dataLength; i++) {
         let tuple = document.createElement("tr");
         tuple.setAttribute("id", "tupla-" + tupla_num);
         tuple.setAttribute("name", "tupla");
         tupla_num++;
         tuple.innerHTML = tupleFormat;
 
-        if (typeof(cookieDataJson.cookieDatadia) === "string") {
-            tuple.querySelector("#datadia").value = cookieDataJson.cookieDatadia;
+        if (typeof(JSONData.datadia) === "string") {
+            tuple.querySelector("#datadia").value = JSONData.datadia;
         } else {
-            tuple.querySelector("#datadia").value = cookieDataJson.cookieDatadia[i];
+            tuple.querySelector("#datadia").value = JSONData.datadia[i];
         }
         
-        if (cookieDataJson.cookieCaixa[i] === "1")
+        if (JSONData.caixa[i] === "1")
         tuple.querySelector("#caixa").checked = true;
-        if (cookieDataJson.cookieGalao[i] === "1")
+        if (JSONData.galao[i] === "1")
         tuple.querySelector("#galao").checked = true;
-        if (cookieDataJson.cookieVaso[i] === "1")
+        if (JSONData.vaso[i] === "1")
         tuple.querySelector("#vaso").checked = true;
-        if (cookieDataJson.cookieBalde[i] === "1")
+        if (JSONData.balde[i] === "1")
         tuple.querySelector("#balde").checked = true;
-        if (cookieDataJson.cookiePocas[i] === "1")
+        if (JSONData.pocas[i] === "1")
         tuple.querySelector("#pocas").checked = true;
-        if (cookieDataJson.cookieGarrafa[i] === "1")
+        if (JSONData.garrafa[i] === "1")
         tuple.querySelector("#garrafa").checked = true;
-        if (cookieDataJson.cookiePneu[i] === "1")
+        if (JSONData.pneu[i] === "1")
         tuple.querySelector("#pneu").checked = true;
-        if (cookieDataJson.cookiePiscina[i] === "1")
+        if (JSONData.piscina[i] === "1")
         tuple.querySelector("#piscina").checked = true;
-        if (cookieDataJson.cookiePote[i] === "1")
+        if (JSONData.pote[i] === "1")
         tuple.querySelector("#pote").checked = true;
-        if (cookieDataJson.cookieEntulho[i] === "1")
+        if (JSONData.entulho[i] === "1")
         tuple.querySelector("#entulho").checked = true;
-        if (cookieDataJson.cookieCalha[i] === "1")
+        if (JSONData.calha[i] === "1")
         tuple.querySelector("#calha").checked = true;
 
         checklistTableContent.append(tuple);
     }
+} 
+
+const fetchCookies = fetch("/cookies")
+  .then((r) => r.json())
+  .then((data) => {
+    return data;
+  });
+
+async function fetchSaveFile(checklistDataURL) {
+    return fetch(checklistDataURL)
+        .then((r) => r.json())
+        .then((data) => {
+            return data;
+        });
+}
+
+window.addEventListener("DOMContentLoaded", async function (e) {
+    checklistDataJson = await fetchCookies;
+    loadChecklistData(checklistDataJson);
 });
 
 form.addEventListener("submit", saveFormOnWeb);
@@ -96,18 +114,26 @@ saveButtonDevice.addEventListener("click", (e) => {
 });
 
 loadButton.addEventListener("click", async function (e) {
-  location.replace("/load");
+    fileInput.click();
 });
 
 addButton.addEventListener("click", function (e) {
-  let tuple = document.createElement("tr");
-  const checklistTableContent = checklistTable.querySelector("#table-content");
-  tuple.setAttribute("id", "tupla-" + tupla_num);
-  tuple.setAttribute("name", "tupla");
-  tuple.setAttribute("class", "align-center");
-  tupla_num++;
-  tuple.innerHTML = tupleFormat;
-  checklistTableContent.append(tuple);
+    let tuple = document.createElement("tr");
+    const checklistTableContent = checklistTable.querySelector("#table-content");
+    tuple.setAttribute("id", "tupla-" + tupla_num);
+    tuple.setAttribute("name", "tupla");
+    tuple.setAttribute("class", "align-center");
+    tupla_num++;
+    tuple.innerHTML = tupleFormat;
+    checklistTableContent.append(tuple);
+});
+
+fileInput.addEventListener("change", async () => {
+    for (const file of fileInput.files) {
+        const checklistDataURL = URL.createObjectURL(file);
+        const checklistDataJson = await fetchSaveFile(checklistDataURL);
+        loadChecklistData(checklistDataJson);
+    }  
 });
 
 const tupleFormat = `
